@@ -8,11 +8,11 @@ defmodule Blockquote.Admin.ParentSource do
     field :subtitle, :string
     field :title, :string
     field :url, :string
-    field :source_type_id, :id
     
     timestamps()
     
     has_many :sources, Blockquote.Admin.Source
+    belongs_to :source_type, Blockquote.Admin.SourceType
   end
 
   @doc false

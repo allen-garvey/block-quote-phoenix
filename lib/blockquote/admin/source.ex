@@ -8,13 +8,13 @@ defmodule Blockquote.Admin.Source do
     field :subtitle, :string
     field :title, :string
     field :url, :string
-    field :author_id, :id
-    field :source_type_id, :id
-    field :parent_source_id, :id
 
     timestamps()
     
     has_many :quotes, Blockquote.Admin.Quote
+    belongs_to :source_type, Blockquote.Admin.SourceType
+    belongs_to :author, Blockquote.Admin.Author
+    belongs_to :parent_source, Blockquote.Admin.ParentSource
   end
 
   @doc false

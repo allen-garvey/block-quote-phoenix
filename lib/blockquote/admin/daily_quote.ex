@@ -6,9 +6,10 @@ defmodule Blockquote.Admin.DailyQuote do
 
   schema "daily_quotes" do
     field :date_used, :date
-    field :quote_id, :id
 
     timestamps()
+    
+    belongs_to :quote, Blockquote.Admin.Quote
   end
 
   @doc false

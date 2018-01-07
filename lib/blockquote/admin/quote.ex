@@ -6,11 +6,12 @@ defmodule Blockquote.Admin.Quote do
 
   schema "quotes" do
     field :body, :string
-    field :author_id, :id
-    field :category_id, :id
-    field :source_id, :id
 
     timestamps()
+    
+    belongs_to :category, Blockquote.Admin.Category
+    belongs_to :author, Blockquote.Admin.Author
+    belongs_to :source, Blockquote.Admin.Source
     
     has_many :daily_quotes, Blockquote.Admin.DailyQuote
   end
