@@ -1,0 +1,30 @@
+<h2>Listing Parent sources</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Subtitle</th>
+      <th>Url</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for parent_source <- @parent_sources do %>
+    <tr>
+      <td><%= parent_source.title %></td>
+      <td><%= parent_source.subtitle %></td>
+      <td><%= parent_source.url %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: parent_source_path(@conn, :show, parent_source), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: parent_source_path(@conn, :edit, parent_source), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: parent_source_path(@conn, :delete, parent_source), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Parent source", to: parent_source_path(@conn, :new) %></span>

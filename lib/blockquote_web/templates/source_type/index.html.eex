@@ -1,0 +1,26 @@
+<h2>Listing Source types</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for source_type <- @source_types do %>
+    <tr>
+      <td><%= source_type.name %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: source_type_path(@conn, :show, source_type), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: source_type_path(@conn, :edit, source_type), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: source_type_path(@conn, :delete, source_type), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Source type", to: source_type_path(@conn, :new) %></span>

@@ -1,0 +1,26 @@
+<h2>Listing Quotes</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Body</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for quote <- @quotes do %>
+    <tr>
+      <td><%= quote.body %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: quote_path(@conn, :show, quote), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: quote_path(@conn, :edit, quote), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: quote_path(@conn, :delete, quote), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Quote", to: quote_path(@conn, :new) %></span>

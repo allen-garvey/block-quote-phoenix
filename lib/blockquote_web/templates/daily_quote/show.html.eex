@@ -1,0 +1,13 @@
+<h2>Show Daily quote</h2>
+
+<ul>
+
+  <li>
+    <strong>Date used:</strong>
+    <%= @daily_quote.date_used %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: daily_quote_path(@conn, :edit, @daily_quote) %></span>
+<span><%= link "Back", to: daily_quote_path(@conn, :index) %></span>

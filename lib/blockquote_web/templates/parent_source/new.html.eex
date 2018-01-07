@@ -1,0 +1,5 @@
+<h2>New Parent source</h2>
+
+<%= render "form.html", Map.put(assigns, :action, parent_source_path(@conn, :create)) %>
+
+<span><%= link "Back", to: parent_source_path(@conn, :index) %></span>

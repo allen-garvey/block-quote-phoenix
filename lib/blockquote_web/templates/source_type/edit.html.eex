@@ -1,0 +1,5 @@
+<h2>Edit Source type</h2>
+
+<%= render "form.html", Map.put(assigns, :action, source_type_path(@conn, :update, @source_type)) %>
+
+<span><%= link "Back", to: source_type_path(@conn, :index) %></span>

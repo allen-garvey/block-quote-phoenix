@@ -1,0 +1,5 @@
+<h2>Edit Daily quote</h2>
+
+<%= render "form.html", Map.put(assigns, :action, daily_quote_path(@conn, :update, @daily_quote)) %>
+
+<span><%= link "Back", to: daily_quote_path(@conn, :index) %></span>

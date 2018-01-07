@@ -1,0 +1,23 @@
+<h2>Show Parent source</h2>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @parent_source.title %>
+  </li>
+
+  <li>
+    <strong>Subtitle:</strong>
+    <%= @parent_source.subtitle %>
+  </li>
+
+  <li>
+    <strong>Url:</strong>
+    <%= @parent_source.url %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: parent_source_path(@conn, :edit, @parent_source) %></span>
+<span><%= link "Back", to: parent_source_path(@conn, :index) %></span>

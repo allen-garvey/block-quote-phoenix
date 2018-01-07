@@ -1,0 +1,13 @@
+<h2>Show Source type</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @source_type.name %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: source_type_path(@conn, :edit, @source_type) %></span>
+<span><%= link "Back", to: source_type_path(@conn, :index) %></span>
