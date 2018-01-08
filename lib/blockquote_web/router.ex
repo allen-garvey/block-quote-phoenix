@@ -22,6 +22,8 @@ defmodule BlockquoteWeb.Router do
   scope "/admin", BlockquoteWeb do
     pipe_through :browser # Use the default browser stack
     
+    get "/", AdminController, :index
+    
     resources "/authors", AuthorController
     resources "/categories", CategoryController
     resources "/source-types", SourceTypeController
