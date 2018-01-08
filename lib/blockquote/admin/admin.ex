@@ -306,7 +306,7 @@ defmodule Blockquote.Admin do
 
   """
   def list_parent_sources do
-    Repo.all(ParentSource)
+    Repo.all(from(ParentSource, order_by: [:title, :subtitle]))
   end
 
   @doc """
@@ -498,7 +498,7 @@ defmodule Blockquote.Admin do
 
   """
   def list_quotes do
-    Repo.all(Quote)
+    Repo.all(from(Quote, order_by: [desc: :id]))
   end
 
   @doc """
@@ -594,7 +594,7 @@ defmodule Blockquote.Admin do
 
   """
   def list_daily_quotes do
-    Repo.all(DailyQuote)
+    Repo.all(from(DailyQuote, order_by: [desc: :id]))
   end
 
   @doc """
