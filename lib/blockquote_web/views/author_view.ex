@@ -41,6 +41,14 @@ defmodule BlockquoteWeb.AuthorView do
   end
   
   
+  @doc """
+  Maps a list of authors into tuples, used for forms
+  """
+  def map_for_form(authors) do
+    Enum.map(authors, &{to_sorted_name(&1), &1.id})
+  end
+  
+  
   
   
 end

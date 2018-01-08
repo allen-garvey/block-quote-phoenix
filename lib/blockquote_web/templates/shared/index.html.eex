@@ -1,0 +1,18 @@
+<h2><%= String.capitalize(naive_pluralize(@item_name_singular)) %></h2>
+
+<span><%= link "New " <> @item_name_singular, to: path_for_item(@conn, @item_name_singular, :new) %></span>
+
+<table class="table">
+  <tbody>
+<%= for item <- @items do %>
+    <tr>
+      <td><%= link apply(@item_view, @item_display_func, [item]) , to: path_for_item(@conn, @item_name_singular, :show, item) %></td>
+
+      <td class="text-right">
+        <span><%= link "Edit", to: path_for_item(@conn, @item_name_singular, :edit, item), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: path_for_item(@conn, @item_name_singular, :delete, item), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

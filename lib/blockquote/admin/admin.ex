@@ -18,7 +18,7 @@ defmodule Blockquote.Admin do
 
   """
   def list_authors do
-    Repo.all(Author)
+    Repo.all(from(Author, order_by: [:last_name, :first_name, :middle_name]))
   end
 
   @doc """
@@ -114,7 +114,7 @@ defmodule Blockquote.Admin do
 
   """
   def list_categories do
-    Repo.all(Category)
+    Repo.all(from(Category, order_by: :name))
   end
 
   @doc """
@@ -210,7 +210,7 @@ defmodule Blockquote.Admin do
 
   """
   def list_source_types do
-    Repo.all(SourceType)
+    Repo.all(from(SourceType, order_by: :name))
   end
 
   @doc """
@@ -402,7 +402,7 @@ defmodule Blockquote.Admin do
 
   """
   def list_sources do
-    Repo.all(Source)
+    Repo.all(from(Source, order_by: [:title, :subtitle]))
   end
 
   @doc """

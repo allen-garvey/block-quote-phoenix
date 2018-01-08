@@ -3,15 +3,27 @@ defmodule BlockquoteWeb.QuoteController do
 
   alias Blockquote.Admin
   alias Blockquote.Admin.Quote
+  
+  def related_fields do
+    #need to add empty value at start of authors since it is optional
+    authors = Admin.list_authors() |> BlockquoteWeb.AuthorView.map_for_form |> List.insert_at(0, {"", nil})
+    categories = Admin.list_categories() |> BlockquoteWeb.CategoryView.map_for_form
+    sources = Admin.list_sources() |> BlockquoteWeb.SourceView.map_for_form
+    [authors: authors, categories: categories, sources: sources]
+  end
 
   def index(conn, _params) do
     quotes = Admin.list_quotes()
     render(conn, "index.html", quotes: quotes)
   end
 
-  def new(conn, _params) do
+  def new(conn, params) do
     changeset = Admin.change_quote(%Quote{})
-    render(conn, "new.html", changeset: changeset)
+    new(conn, changeset, params)
+  end
+  
+  def new(conn, changeset, _params) do
+    render(conn, "new.html", changeset: changeset, related_fields: related_fields())
   end
 
   def create(conn, %{"quote" => quote_params}) do
@@ -21,7 +33,7 @@ defmodule BlockquoteWeb.QuoteController do
         |> put_flash(:info, "Quote created successfully.")
         |> redirect(to: quote_path(conn, :show, quote))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        new(conn, changeset, nil)
     end
   end
 
@@ -33,7 +45,7 @@ defmodule BlockquoteWeb.QuoteController do
   def edit(conn, %{"id" => id}) do
     quote = Admin.get_quote!(id)
     changeset = Admin.change_quote(quote)
-    render(conn, "edit.html", quote: quote, changeset: changeset)
+    render(conn, "edit.html", quote: quote, changeset: changeset, related_fields: related_fields())
   end
 
   def update(conn, %{"id" => id, "quote" => quote_params}) do
@@ -45,7 +57,7 @@ defmodule BlockquoteWeb.QuoteController do
         |> put_flash(:info, "Quote updated successfully.")
         |> redirect(to: quote_path(conn, :show, quote))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", quote: quote, changeset: changeset)
+        render(conn, "edit.html", quote: quote, changeset: changeset, related_fields: related_fields())
     end
   end
 
