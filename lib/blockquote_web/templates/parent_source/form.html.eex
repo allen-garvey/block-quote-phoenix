@@ -16,6 +16,12 @@
     <%= text_input f, :subtitle, class: "form-control" %>
     <%= error_tag f, :subtitle %>
   </div>
+  
+  <div class="form-group">
+    <%= label f, :source_type_id, class: "control-label" %>
+    <%= select f, :source_type_id, @related_fields[:source_types] , class: "form-control" %>
+    <%= error_tag f, :source_type_id %>
+  </div>
 
   <div class="form-group">
     <%= label f, :url, class: "control-label" %>

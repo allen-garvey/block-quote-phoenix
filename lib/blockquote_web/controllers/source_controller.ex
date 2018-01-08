@@ -3,15 +3,28 @@ defmodule BlockquoteWeb.SourceController do
 
   alias Blockquote.Admin
   alias Blockquote.Admin.Source
-
+  
+  def related_fields do
+    authors = Admin.list_authors() |> BlockquoteWeb.AuthorView.map_for_form
+    source_types = Admin.list_source_types() |> BlockquoteWeb.SourceTypeView.map_for_form
+    #insert blank value since parent source is optional
+    parent_sources = Admin.list_parent_sources() |> BlockquoteWeb.ParentSourceView.map_for_form |> List.insert_at(0, {"", nil})
+    
+    [authors: authors, source_types: source_types, parent_sources: parent_sources]
+  end
+  
   def index(conn, _params) do
     sources = Admin.list_sources()
-    render(conn, "index.html", sources: sources)
+    render(conn, BlockquoteWeb.SharedView, "index.html", items: sources, item_view: view_module(conn), item_name_singular: "source", item_display_func: :to_s)
+  end
+  
+  def new_page(conn, changeset, _params) do
+    render(conn, "new.html", changeset: changeset, related_fields: related_fields())
   end
 
-  def new(conn, _params) do
+  def new(conn, params) do
     changeset = Admin.change_source(%Source{})
-    render(conn, "new.html", changeset: changeset)
+    new_page(conn, changeset, params)
   end
 
   def create(conn, %{"source" => source_params}) do
@@ -21,7 +34,7 @@ defmodule BlockquoteWeb.SourceController do
         |> put_flash(:info, "Source created successfully.")
         |> redirect(to: source_path(conn, :show, source))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        new_page(conn, changeset, nil)
     end
   end
 

@@ -16,6 +16,24 @@
     <%= text_input f, :subtitle, class: "form-control" %>
     <%= error_tag f, :subtitle %>
   </div>
+  
+  <div class="form-group">
+    <%= label f, :author_id, class: "control-label" %>
+    <%= select f, :author_id, @related_fields[:authors] , class: "form-control" %>
+    <%= error_tag f, :author_id %>
+  </div>
+  
+  <div class="form-group">
+    <%= label f, :source_type_id, class: "control-label" %>
+    <%= select f, :source_type_id, @related_fields[:source_types] , class: "form-control" %>
+    <%= error_tag f, :source_type_id %>
+  </div>
+  
+  <div class="form-group">
+    <%= label f, :parent_source_id, class: "control-label" %>
+    <%= select f, :parent_source_id, @related_fields[:parent_sources] , class: "form-control" %>
+    <%= error_tag f, :parent_source_id %>
+  </div>
 
   <div class="form-group">
     <%= label f, :url, class: "control-label" %>

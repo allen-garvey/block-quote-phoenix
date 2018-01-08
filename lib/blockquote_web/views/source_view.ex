@@ -2,7 +2,15 @@ defmodule BlockquoteWeb.SourceView do
   use BlockquoteWeb, :view
   
   def to_s(source) do
-    source.title
+    to_s(source.title, source.subtitle)
+  end
+  
+  def to_s(title, nil) do
+    title
+  end
+  
+  def to_s(title, subtitle) do
+    title <> ": " <> subtitle
   end
   
   @doc """

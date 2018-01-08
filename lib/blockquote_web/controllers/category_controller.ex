@@ -6,7 +6,7 @@ defmodule BlockquoteWeb.CategoryController do
 
   def index(conn, _params) do
     categories = Admin.list_categories()
-    render(conn, "index.html", categories: categories)
+    render(conn, BlockquoteWeb.SharedView, "index.html", items: categories, item_view: view_module(conn), item_name_singular: "category", item_display_func: :to_s)
   end
 
   def new(conn, _params) do

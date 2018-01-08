@@ -14,15 +14,15 @@ defmodule BlockquoteWeb.QuoteController do
 
   def index(conn, _params) do
     quotes = Admin.list_quotes()
-    render(conn, "index.html", quotes: quotes)
+    render(conn, BlockquoteWeb.SharedView, "index.html", items: quotes, item_view: view_module(conn), item_name_singular: "quote", item_display_func: :to_excerpt)
   end
 
   def new(conn, params) do
     changeset = Admin.change_quote(%Quote{})
-    new(conn, changeset, params)
+    new_page(conn, changeset, params)
   end
   
-  def new(conn, changeset, _params) do
+  def new_page(conn, changeset, _params) do
     render(conn, "new.html", changeset: changeset, related_fields: related_fields())
   end
 
@@ -33,7 +33,7 @@ defmodule BlockquoteWeb.QuoteController do
         |> put_flash(:info, "Quote created successfully.")
         |> redirect(to: quote_path(conn, :show, quote))
       {:error, %Ecto.Changeset{} = changeset} ->
-        new(conn, changeset, nil)
+        new_page(conn, changeset, nil)
     end
   end
 
