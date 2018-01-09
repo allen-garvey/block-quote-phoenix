@@ -1,4 +1,4 @@
-<%= if Kernel.length(@items) > 0 do %>
+<%= if !Enum.empty?(@items) do %>
     <h4><%= String.capitalize(naive_pluralize(@item_name_singular)) %></h4>
     <ul>
         <%= for item <- @items do %>
