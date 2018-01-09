@@ -39,7 +39,7 @@ defmodule BlockquoteWeb.SourceController do
   end
 
   def show(conn, %{"id" => id}) do
-    source = Admin.get_source!(id)
+    source = Admin.get_source_for_show!(id)
     render(conn, "show.html", source: source)
   end
 

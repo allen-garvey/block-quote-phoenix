@@ -26,7 +26,7 @@ defmodule BlockquoteWeb.SourceTypeController do
   end
 
   def show(conn, %{"id" => id}) do
-    source_type = Admin.get_source_type!(id)
+    source_type = Admin.get_source_type_for_show!(id)
     render(conn, "show.html", source_type: source_type)
   end
 

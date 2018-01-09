@@ -11,4 +11,17 @@ defmodule BlockquoteWeb.SourceTypeView do
   def map_for_form(source_types) do
     Enum.map(source_types, &{to_s(&1), &1.id})
   end
+  
+  def item_columns(_conn, source_type) do
+    [
+      {"name", source_type.name}, 
+    ]
+  end
+  
+  
+  def form_fields() do
+    [
+      {:name, :string, nil},
+    ]
+  end
 end

@@ -140,6 +140,14 @@ defmodule Blockquote.Admin do
 
   """
   def get_category!(id), do: Repo.get!(Category, id)
+  
+  @doc """
+  Gets a single category.
+
+  Raises `Ecto.NoResultsError` if the Category does not exist.
+
+  """
+  def get_category_for_show!(id), do: Repo.get!(Category, id) |> Repo.preload([:quotes])
 
   @doc """
   Creates a category.
@@ -236,6 +244,14 @@ defmodule Blockquote.Admin do
 
   """
   def get_source_type!(id), do: Repo.get!(SourceType, id)
+  
+  @doc """
+  Gets a single source_type.
+
+  Raises `Ecto.NoResultsError` if the Source type does not exist.
+
+  """
+  def get_source_type_for_show!(id), do: Repo.get!(SourceType, id) |> Repo.preload([:sources, :parent_sources])
 
   @doc """
   Creates a source_type.
@@ -332,6 +348,14 @@ defmodule Blockquote.Admin do
 
   """
   def get_parent_source!(id), do: Repo.get!(ParentSource, id)
+  
+  @doc """
+  Gets a single parent_source.
+
+  Raises `Ecto.NoResultsError` if the Parent source does not exist.
+
+  """
+  def get_parent_source_for_show!(id), do: Repo.get!(ParentSource, id) |> Repo.preload([:sources, :source_type])
 
   @doc """
   Creates a parent_source.
@@ -428,6 +452,14 @@ defmodule Blockquote.Admin do
 
   """
   def get_source!(id), do: Repo.get!(Source, id)
+  
+  @doc """
+  Gets a single source.
+
+  Raises `Ecto.NoResultsError` if the Source does not exist.
+
+  """
+  def get_source_for_show!(id), do: Repo.get!(Source, id) |> Repo.preload([:source_type, :quotes, :author, :parent_source])
 
   @doc """
   Creates a source.

@@ -1,23 +1,15 @@
-<h2>Show Parent source</h2>
+<%= render BlockquoteWeb.SharedView, "show_header.html",
+                                conn: @conn,
+                                title: to_s(@parent_source),
+                                item_name_singular: "parent source",
+                                item: @parent_source,
+                                item_columns: item_columns(@conn, @parent_source)
+%>
 
-<ul>
-
-  <li>
-    <strong>Title:</strong>
-    <%= @parent_source.title %>
-  </li>
-
-  <li>
-    <strong>Subtitle:</strong>
-    <%= @parent_source.subtitle %>
-  </li>
-
-  <li>
-    <strong>Url:</strong>
-    <%= @parent_source.url %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: parent_source_path(@conn, :edit, @parent_source) %></span>
-<span><%= link "Back", to: parent_source_path(@conn, :index) %></span>
+<%= render BlockquoteWeb.SharedView, "related_fields_list.html",
+                                conn: @conn,
+                                item_name_singular: "source",
+                                items: @parent_source.sources,
+                                item_view: BlockquoteWeb.SourceView,
+                                item_display_func: :to_s
+%>

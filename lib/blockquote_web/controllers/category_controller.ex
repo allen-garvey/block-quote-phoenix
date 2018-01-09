@@ -26,7 +26,7 @@ defmodule BlockquoteWeb.CategoryController do
   end
 
   def show(conn, %{"id" => id}) do
-    category = Admin.get_category!(id)
+    category = Admin.get_category_for_show!(id)
     render(conn, "show.html", category: category)
   end
 

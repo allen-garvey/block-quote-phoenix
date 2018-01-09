@@ -1,13 +1,15 @@
-<h2>Show Category</h2>
+<%= render BlockquoteWeb.SharedView, "show_header.html",
+                                conn: @conn,
+                                title: to_s(@category),
+                                item_name_singular: "category",
+                                item: @category,
+                                item_columns: item_columns(@conn, @category)
+%>
 
-<ul>
-
-  <li>
-    <strong>Name:</strong>
-    <%= @category.name %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: category_path(@conn, :edit, @category) %></span>
-<span><%= link "Back", to: category_path(@conn, :index) %></span>
+<%= render BlockquoteWeb.SharedView, "related_fields_list.html",
+                                conn: @conn,
+                                item_name_singular: "quote",
+                                items: @category.quotes,
+                                item_view: BlockquoteWeb.QuoteView,
+                                item_display_func: :to_excerpt
+%>

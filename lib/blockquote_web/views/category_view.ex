@@ -12,4 +12,17 @@ defmodule BlockquoteWeb.CategoryView do
     Enum.map(categories, &{to_s(&1), &1.id})
   end
   
+  def item_columns(_conn, category) do
+    [
+      {"name", category.name}, 
+    ]
+  end
+  
+  
+  def form_fields() do
+    [
+      {:name, :string, nil},
+    ]
+  end
+  
 end

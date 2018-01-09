@@ -46,6 +46,17 @@ defmodule BlockquoteWeb.SharedView do
   		Integer.to_string(digit) |> String.pad_leading(2, ["0"])
   	end
   	
+  	@doc """
+  	Used to turn a url that might be nil into a link
+  	"""
+  	def linkify(nil) do
+  		nil
+  	end
+  	
+  	def linkify(url) do
+  		link(url, to: url)
+  	end
+  	
   	
   	@doc """
   	Used for forms to determine if required

@@ -36,7 +36,7 @@ defmodule BlockquoteWeb.ParentSourceController do
   end
 
   def show(conn, %{"id" => id}) do
-    parent_source = Admin.get_parent_source!(id)
+    parent_source = Admin.get_parent_source_for_show!(id)
     render(conn, "show.html", parent_source: parent_source)
   end
 

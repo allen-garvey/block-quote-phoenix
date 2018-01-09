@@ -1,13 +1,23 @@
-<h2>Show Source type</h2>
+<%= render BlockquoteWeb.SharedView, "show_header.html",
+                                conn: @conn,
+                                title: to_s(@source_type),
+                                item_name_singular: "source type",
+                                item: @source_type,
+                                item_columns: item_columns(@conn, @source_type)
+%>
 
-<ul>
+<%= render BlockquoteWeb.SharedView, "related_fields_list.html",
+                                conn: @conn,
+                                item_name_singular: "parent source",
+                                items: @source_type.parent_sources,
+                                item_view: BlockquoteWeb.ParentSourceView,
+                                item_display_func: :to_s
+%>
 
-  <li>
-    <strong>Name:</strong>
-    <%= @source_type.name %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: source_type_path(@conn, :edit, @source_type) %></span>
-<span><%= link "Back", to: source_type_path(@conn, :index) %></span>
+<%= render BlockquoteWeb.SharedView, "related_fields_list.html",
+                                conn: @conn,
+                                item_name_singular: "source",
+                                items: @source_type.sources,
+                                item_view: BlockquoteWeb.SourceView,
+                                item_display_func: :to_s
+%>
