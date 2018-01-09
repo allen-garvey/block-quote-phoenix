@@ -10,7 +10,6 @@
 
       <td class="text-right">
         <span><%= link "Edit", to: path_for_item(@conn, @item_name_singular, :edit, item), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Delete", to: path_for_item(@conn, @item_name_singular, :delete, item), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
       </td>
     </tr>
 <% end %>
