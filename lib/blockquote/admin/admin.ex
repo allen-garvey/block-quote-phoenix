@@ -515,7 +515,7 @@ defmodule Blockquote.Admin do
       ** (Ecto.NoResultsError)
 
   """
-  def get_quote!(id), do: Repo.get!(Quote, id)
+  def get_quote!(id), do: Repo.get!(Quote, id) |> Repo.preload([:category, :author, :source]) |> Repo.preload([source: :author])
 
   @doc """
   Creates a quote.

@@ -34,4 +34,15 @@ defmodule BlockquoteWeb.SharedView do
 	def path_for_item(conn, item_name_singular, path_atom, item_instance) do
 		apply(BlockquoteWeb.Router.Helpers, item_path_func_name(item_name_singular), [conn, path_atom, item_instance])
 	end
+	
+	@doc """
+  	Returns inserted_at date as string for ecto model
+  	"""
+  	def item_date_created(item) do
+  		"#{item.inserted_at.year}-#{pad_date_digit(item.inserted_at.month)}-#{pad_date_digit(item.inserted_at.day)} #{pad_date_digit(item.inserted_at.hour)}:#{pad_date_digit(item.inserted_at.minute)}"
+  	end
+  	
+  	def pad_date_digit(digit) do
+  		Integer.to_string(digit) |> String.pad_leading(2, ["0"])
+  	end
 end

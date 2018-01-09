@@ -1,0 +1,15 @@
+<span><%= link "All " <> naive_pluralize(@item_name_singular), to: path_for_item(@conn, @item_name_singular, :index) %></span>
+
+<h2><%= @title %></h2>
+
+
+<span><%= link "Edit", to: path_for_item(@conn, @item_name_singular, :edit, @item), class: "btn btn-default btn-xs" %></span>
+<span><%= link "Delete", to: path_for_item(@conn, @item_name_singular, :delete, @item), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+<ul>
+    <%= for {column_name, column_value} <- @item_columns do %>
+        <li>
+            <strong><%= String.capitalize(column_name) %>:</strong>
+            <%= column_value %>
+        </li>
+    <% end %>
+</ul>
