@@ -48,6 +48,23 @@ defmodule BlockquoteWeb.AuthorView do
     Enum.map(authors, &{to_sorted_name(&1), &1.id})
   end
   
+  def item_columns(_conn, author) do
+    [
+      {"first name", author.first_name}, 
+      {"middle name", author.middle_name}, 
+      {"last name", author.last_name},
+    ]
+  end
+  
+  
+  def form_fields() do
+    [
+      {:first_name, :string, nil},
+      {:middle_name, :string, nil},
+      {:last_name, :string, nil},
+    ]
+  end
+  
   
   
   

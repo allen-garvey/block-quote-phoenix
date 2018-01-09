@@ -26,7 +26,7 @@ defmodule BlockquoteWeb.AuthorController do
   end
 
   def show(conn, %{"id" => id}) do
-    author = Admin.get_author!(id)
+    author = Admin.get_author_for_show!(id)
     render(conn, "show.html", author: author)
   end
 

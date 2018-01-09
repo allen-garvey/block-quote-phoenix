@@ -1,23 +1,23 @@
-<h2>Show Author</h2>
+<%= render BlockquoteWeb.SharedView, "show_header.html",
+                                conn: @conn,
+                                title: to_s(@author),
+                                item_name_singular: "author",
+                                item: @author,
+                                item_columns: item_columns(@conn, @author)
+%>
 
-<ul>
+<%= render BlockquoteWeb.SharedView, "related_fields_list.html",
+                                conn: @conn,
+                                item_name_singular: "source",
+                                items: @author.sources,
+                                item_view: BlockquoteWeb.SourceView,
+                                item_display_func: :to_s
+%>
 
-  <li>
-    <strong>First name:</strong>
-    <%= @author.first_name %>
-  </li>
-
-  <li>
-    <strong>Middle name:</strong>
-    <%= @author.middle_name %>
-  </li>
-
-  <li>
-    <strong>Last name:</strong>
-    <%= @author.last_name %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: author_path(@conn, :edit, @author) %></span>
-<span><%= link "Back", to: author_path(@conn, :index) %></span>
+<%= render BlockquoteWeb.SharedView, "related_fields_list.html",
+                                conn: @conn,
+                                item_name_singular: "quote",
+                                items: Enum.flat_map(@author.sources, &(&1.quotes)),
+                                item_view: BlockquoteWeb.QuoteView,
+                                item_display_func: :to_excerpt
+%>
