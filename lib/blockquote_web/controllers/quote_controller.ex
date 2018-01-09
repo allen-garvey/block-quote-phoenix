@@ -38,7 +38,7 @@ defmodule BlockquoteWeb.QuoteController do
   end
 
   def show(conn, %{"id" => id}) do
-    quote = Admin.get_quote!(id)
+    quote = Admin.get_quote_for_show!(id)
     render(conn, "show.html", quote: quote)
   end
 
