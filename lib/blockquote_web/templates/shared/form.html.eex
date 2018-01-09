@@ -1,0 +1,19 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= for { field, type, items } <- @form_fields do %>
+      <div class="form-group">
+          <%= form_item_label(f, field, @required_fields) %>
+          <%= form_input(f, type, field, @required_fields, items) %>
+          <%= error_tag(f, field) %>
+      </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>
