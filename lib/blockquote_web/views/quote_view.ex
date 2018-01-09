@@ -23,11 +23,12 @@ defmodule BlockquoteWeb.QuoteView do
     category_link = link(BlockquoteWeb.CategoryView.to_s(quote.category), to: category_path(conn, :show, quote.category))
     source_link = link(BlockquoteWeb.SourceView.to_s(quote.source), to: source_path(conn, :show, quote.source))
     
-    [{"body", quote.body}, 
-    {"author", author_link}, 
-    {"category", category_link},
-    {"source", source_link},
-    {"added", BlockquoteWeb.SharedView.item_date_created(quote)},
+    [
+      {"body", quote.body}, 
+      {"author", author_link}, 
+      {"category", category_link},
+      {"source", source_link},
+      {"added", BlockquoteWeb.SharedView.item_date_created(quote)},
     ]
   end
 end
