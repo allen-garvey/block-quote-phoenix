@@ -1,0 +1,8 @@
+<h4><%= String.capitalize(naive_pluralize(@item_name_singular)) %></h4>
+<ul>
+    <%= for item <- @items do %>
+        <li>
+            <%= link apply(@item_view, @item_display_func, [item]) , to: path_for_item(@conn, @item_name_singular, :show, item) %>
+        </li>
+    <% end %>
+</ul>
