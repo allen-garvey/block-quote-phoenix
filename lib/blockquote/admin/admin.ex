@@ -36,6 +36,14 @@ defmodule Blockquote.Admin do
 
   """
   def get_author!(id), do: Repo.get!(Author, id)
+  
+  @doc """
+  Gets a single author for show pages.
+
+  Raises `Ecto.NoResultsError` if the Author does not exist.
+
+  """
+  def get_author_for_show!(id), do: Repo.get!(Author, id) |> Repo.preload([:sources]) |> Repo.preload([sources: :quotes])
 
   @doc """
   Creates a author.
@@ -515,7 +523,15 @@ defmodule Blockquote.Admin do
       ** (Ecto.NoResultsError)
 
   """
-  def get_quote!(id), do: Repo.get!(Quote, id) |> Repo.preload([:category, :author, :source]) |> Repo.preload([source: :author])
+  def get_quote!(id), do: Repo.get!(Quote, id)
+  
+  @doc """
+  Gets a single quote for show pages.
+
+  Raises `Ecto.NoResultsError` if the Quote does not exist.
+
+  """
+  def get_quote_for_show!(id), do: Repo.get!(Quote, id) |> Repo.preload([:category, :author, :source]) |> Repo.preload([source: :author])
 
   @doc """
   Creates a quote.
