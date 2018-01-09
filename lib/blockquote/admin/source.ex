@@ -16,12 +16,16 @@ defmodule Blockquote.Admin.Source do
     belongs_to :author, Blockquote.Admin.Author
     belongs_to :parent_source, Blockquote.Admin.ParentSource
   end
+  
+  def required_fields() do
+    [:title, :author_id, :source_type_id]
+  end
 
   @doc false
   def changeset(%Source{} = source, attrs) do
     source
     |> cast(attrs, [:title, :subtitle, :url, :author_id, :source_type_id, :parent_source_id])
-    |> validate_required([:title, :author_id, :source_type_id])
+    |> validate_required(required_fields())
     |> foreign_key_constraint(:source_type_id)
     |> assoc_constraint(:source_type)
     |> foreign_key_constraint(:author_id)

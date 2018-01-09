@@ -12,13 +12,18 @@ defmodule Blockquote.Admin.Author do
     timestamps()
     
     has_many :quotes, Blockquote.Admin.Quote
+    has_many :sources, Blockquote.Admin.Source
+  end
+  
+  def required_fields() do
+    [:first_name]
   end
 
   @doc false
   def changeset(%Author{} = author, attrs) do
     author
     |> cast(attrs, [:first_name, :middle_name, :last_name])
-    |> validate_required([:first_name])
+    |> validate_required(required_fields())
     |> unique_constraint(:first_name, name: :author_unique_name_index)
     |> unique_constraint(:middle_name, name: :author_unique_name_index)
     |> unique_constraint(:last_name, name: :author_unique_name_index)

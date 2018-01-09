@@ -15,12 +15,16 @@ defmodule Blockquote.Admin.Quote do
     
     has_many :daily_quotes, Blockquote.Admin.DailyQuote
   end
+  
+  def required_fields() do
+    [:body, :source_id, :category_id]
+  end
 
   @doc false
   def changeset(%Quote{} = quote, attrs) do
     quote
     |> cast(attrs, [:body, :author_id, :category_id, :source_id])
-    |> validate_required([:body, :source_id, :category_id])
+    |> validate_required(required_fields())
     |> foreign_key_constraint(:author_id)
     |> assoc_constraint(:author)
     |> foreign_key_constraint(:source_id)

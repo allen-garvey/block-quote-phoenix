@@ -11,12 +11,16 @@ defmodule Blockquote.Admin.Category do
     
     has_many :quotes, Blockquote.Admin.Quote
   end
+  
+  def required_fields() do
+    [:name]
+  end
 
   @doc false
   def changeset(%Category{} = category, attrs) do
     category
     |> cast(attrs, [:name])
-    |> validate_required([:name])
+    |> validate_required(required_fields())
     |> unique_constraint(:name)
   end
 end
