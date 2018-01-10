@@ -1,6 +1,28 @@
 defmodule BlockquoteWeb.SourceView do
   use BlockquoteWeb, :view
   
+  def render("new.html", assigns) do
+    assigns = Map.merge(assigns, shared_form_assigns(assigns))
+    render BlockquoteWeb.SharedView, "new.html", assigns
+  end
+
+  def render("edit.html", assigns) do
+    assigns = Map.merge(assigns, 
+      %{
+        item_display_name: to_s(assigns[:item])
+      }
+    ) |> Map.merge(shared_form_assigns(assigns))
+    render BlockquoteWeb.SharedView, "edit.html", assigns
+  end
+
+  def shared_form_assigns(assigns) do
+    %{
+        item_name_singular: "source",
+        required_fields: Blockquote.Admin.Source.required_fields(), 
+        form_fields: form_fields(assigns[:related_fields])
+      }
+  end
+  
   def to_s(source) do
     to_s(source.title, source.subtitle)
   end
@@ -39,13 +61,13 @@ defmodule BlockquoteWeb.SourceView do
   end
   
   
-  def form_fields(items) do
+  def form_fields(related_fields) do
     [
       {:title, :string, nil},
       {:subtitle, :string, nil},
-      {:author_id, :select, items[:authors]},
-      {:source_type_id, :select, items[:source_types]},
-      {:parent_source_id, :select, items[:parent_sources]},
+      {:author_id, :select, related_fields[:authors]},
+      {:source_type_id, :select, related_fields[:source_types]},
+      {:parent_source_id, :select, related_fields[:parent_sources]},
       {:url, :string, nil},
     ]
   end

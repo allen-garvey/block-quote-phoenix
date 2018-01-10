@@ -18,6 +18,10 @@ defmodule BlockquoteWeb.ParentSourceController do
   def new_page(conn, changeset, _params) do
     render(conn, "new.html", changeset: changeset, related_fields: related_fields())
   end
+  
+  def edit_page(conn, changeset, parent_source) do
+    render(conn, "edit.html", changeset: changeset, related_fields: related_fields(), item: parent_source)
+  end
 
   def new(conn, params) do
     changeset = Admin.change_parent_source(%ParentSource{})
@@ -43,7 +47,7 @@ defmodule BlockquoteWeb.ParentSourceController do
   def edit(conn, %{"id" => id}) do
     parent_source = Admin.get_parent_source!(id)
     changeset = Admin.change_parent_source(parent_source)
-    render(conn, "edit.html", parent_source: parent_source, changeset: changeset)
+    edit_page(conn, changeset, parent_source)
   end
 
   def update(conn, %{"id" => id, "parent_source" => parent_source_params}) do
@@ -55,7 +59,7 @@ defmodule BlockquoteWeb.ParentSourceController do
         |> put_flash(:info, "Parent source updated successfully.")
         |> redirect(to: parent_source_path(conn, :show, parent_source))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", parent_source: parent_source, changeset: changeset)
+        edit_page(conn, changeset, parent_source)
     end
   end
 

@@ -21,6 +21,10 @@ defmodule BlockquoteWeb.SourceController do
   def new_page(conn, changeset, _params) do
     render(conn, "new.html", changeset: changeset, related_fields: related_fields())
   end
+  
+  def edit_page(conn, changeset, source) do
+    render(conn, "edit.html", changeset: changeset, related_fields: related_fields(), item: source)
+  end
 
   def new(conn, params) do
     changeset = Admin.change_source(%Source{})
@@ -46,7 +50,7 @@ defmodule BlockquoteWeb.SourceController do
   def edit(conn, %{"id" => id}) do
     source = Admin.get_source!(id)
     changeset = Admin.change_source(source)
-    render(conn, "edit.html", source: source, changeset: changeset)
+    edit_page(conn, changeset, source)
   end
 
   def update(conn, %{"id" => id, "source" => source_params}) do
@@ -58,7 +62,7 @@ defmodule BlockquoteWeb.SourceController do
         |> put_flash(:info, "Source updated successfully.")
         |> redirect(to: source_path(conn, :show, source))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", source: source, changeset: changeset)
+        edit_page(conn, changeset, source)
     end
   end
 

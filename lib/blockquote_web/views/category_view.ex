@@ -1,6 +1,29 @@
 defmodule BlockquoteWeb.CategoryView do
   use BlockquoteWeb, :view
   
+  def render("new.html", assigns) do
+    assigns = Map.merge(assigns, shared_form_assigns())
+    render BlockquoteWeb.SharedView, "new.html", assigns
+  end
+
+  def render("edit.html", assigns) do
+    assigns = Map.merge(assigns, 
+      %{
+        item: assigns[:category],
+        item_display_name: to_s(assigns[:category])
+      }
+    ) |> Map.merge(shared_form_assigns())
+    render BlockquoteWeb.SharedView, "edit.html", assigns
+  end
+
+  def shared_form_assigns() do
+    %{
+        item_name_singular: "category",
+        required_fields: Blockquote.Admin.Category.required_fields(), 
+        form_fields: form_fields()
+      }
+  end
+  
   def to_s(category) do
     category.name
   end
