@@ -84,38 +84,42 @@ defmodule BlockquoteWeb.SharedView do
 	def form_input(f, :text, field, required_fields, nil) do
 		textarea(f, field, class: "form-control", required: field_required?(field, required_fields))
 	end
+	
+	def form_input(f, :select, field, required_fields, items) do
+		select(f, field, items, class: "form-control", required: field_required?(field, required_fields))
+	end
 
-  def render("new.html", assigns) do
-    conn = assigns[:conn]
-    item_name_singular = assigns[:item_name_singular]
+    def render("new.html", assigns) do
+        conn = assigns[:conn]
+        item_name_singular = assigns[:item_name_singular]
+        
+        assigns = Map.merge(assigns, 
+            %{
+                title: "New " <> item_name_singular,
+                back_link_title: "All " <> naive_pluralize(item_name_singular),
+                back_link_path: path_for_item(conn, item_name_singular, :index),
+                action: path_for_item(conn, item_name_singular, :create),
+            }
+        )
+        
+        render "form_page.html", assigns
+    end
 
-    assigns = Map.merge(assigns, 
-      %{
-        title: "New " <> item_name_singular,
-        back_link_title: "All " <> naive_pluralize(item_name_singular),
-        back_link_path: path_for_item(conn, item_name_singular, :index),
-        action: path_for_item(conn, item_name_singular, :create),
-      }
-    )
-
-    render "form_page.html", assigns
-  end
-
-  def render("edit.html", assigns) do
-    conn = assigns[:conn]
-    item_name_singular = assigns[:item_name_singular]
-    item = assigns[:item]
-    item_display_name = assigns[:item_display_name]
-
-    assigns = Map.merge(assigns, 
-      %{
-        title: "Edit " <> item_display_name,
-        back_link_title: "Back to " <> item_display_name,
-        back_link_path: path_for_item(conn, item_name_singular, :show, item),
-        action: path_for_item(conn, item_name_singular, :update, item),
-      }
-    )
-
-    render "form_page.html", assigns
-  end
+    def render("edit.html", assigns) do
+        conn = assigns[:conn]
+        item_name_singular = assigns[:item_name_singular]
+        item = assigns[:item]
+        item_display_name = assigns[:item_display_name]
+        
+        assigns = Map.merge(assigns, 
+            %{
+                title: "Edit " <> item_display_name,
+                back_link_title: "Back to " <> item_display_name,
+                back_link_path: path_for_item(conn, item_name_singular, :show, item),
+                action: path_for_item(conn, item_name_singular, :update, item),
+            }
+        )
+        
+        render "form_page.html", assigns
+    end
 end
