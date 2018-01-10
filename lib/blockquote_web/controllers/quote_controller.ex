@@ -25,6 +25,10 @@ defmodule BlockquoteWeb.QuoteController do
   def new_page(conn, changeset, _params) do
     render(conn, "new.html", changeset: changeset, related_fields: related_fields())
   end
+  
+  def edit_page(conn, changeset, quote) do
+    render(conn, "edit.html", changeset: changeset, related_fields: related_fields(), item: quote)
+  end
 
   def create(conn, %{"quote" => quote_params}) do
     case Admin.create_quote(quote_params) do
@@ -45,7 +49,7 @@ defmodule BlockquoteWeb.QuoteController do
   def edit(conn, %{"id" => id}) do
     quote = Admin.get_quote!(id)
     changeset = Admin.change_quote(quote)
-    render(conn, "edit.html", quote: quote, changeset: changeset, related_fields: related_fields())
+    edit_page(conn, changeset, quote)
   end
 
   def update(conn, %{"id" => id, "quote" => quote_params}) do
@@ -57,7 +61,7 @@ defmodule BlockquoteWeb.QuoteController do
         |> put_flash(:info, "Quote updated successfully.")
         |> redirect(to: quote_path(conn, :show, quote))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", quote: quote, changeset: changeset, related_fields: related_fields())
+        edit_page(conn, changeset, quote)
     end
   end
 
