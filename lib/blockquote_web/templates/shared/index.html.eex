@@ -1,7 +1,11 @@
-<h2><%= String.capitalize(naive_pluralize(@item_name_singular)) %></h2>
+<h2><%= "Select " <> @item_name_singular %></h2>
 
-<span><%= link "New " <> @item_name_singular, to: path_for_item(@conn, @item_name_singular, :new) %></span>
-
+<ul class="object-tools">
+	<li>
+		<%= link "Add " <> @item_name_singular, to: path_for_item(@conn, @item_name_singular, :new), class: "addlink" %>
+	</li>
+</ul>
+<h3><%= String.capitalize(@item_name_singular) %></h3>
 <table class="table">
   <tbody>
 <%= for item <- @items do %>

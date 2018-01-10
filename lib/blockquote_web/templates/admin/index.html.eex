@@ -1,7 +1,10 @@
-<h2>Fields</h2>
+<h2>Site administration</h2>
 
 <ul>
     <%= for field <- @fields do %>
-        <li><%= link String.capitalize(BlockquoteWeb.SharedView.naive_pluralize(field)), to: BlockquoteWeb.SharedView.path_for_item(@conn, field, :index) %></li>
+        <li>
+        	<%= link String.capitalize(BlockquoteWeb.SharedView.naive_pluralize(field)), to: BlockquoteWeb.SharedView.path_for_item(@conn, field, :index) %>
+        	<%= link "Add", to: BlockquoteWeb.SharedView.path_for_item(@conn, field, :new) %>
+        </li>
     <% end %>
 </ul>
