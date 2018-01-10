@@ -1,5 +1,28 @@
 defmodule BlockquoteWeb.AuthorView do
   use BlockquoteWeb, :view
+
+  def render("new.html", assigns) do
+    assigns = Map.merge(assigns, shared_form_assigns())
+    render BlockquoteWeb.SharedView, "new.html", assigns
+  end
+
+  def render("edit.html", assigns) do
+    assigns = Map.merge(assigns, 
+      %{
+        item: assigns[:author],
+        item_display_name: to_s(assigns[:author])
+      }
+    ) |> Map.merge(shared_form_assigns())
+    render BlockquoteWeb.SharedView, "edit.html", assigns
+  end
+
+  def shared_form_assigns() do
+    %{
+        item_name_singular: "author",
+        required_fields: Blockquote.Admin.Author.required_fields(), 
+        form_fields: form_fields()
+      }
+  end
   
   
   def to_s(author) do

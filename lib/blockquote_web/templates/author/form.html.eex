@@ -1,3 +1,0 @@
-<%= render(BlockquoteWeb.SharedView, "form.html", 
-  conn: @conn, changeset: @changeset, action: @action, required_fields: Blockquote.Admin.Author.required_fields(), form_fields: form_fields()) %>
-
