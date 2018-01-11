@@ -3,6 +3,7 @@ defmodule BlockquoteWeb.QuoteController do
 
   alias Blockquote.Admin
   alias Blockquote.Admin.Quote
+  alias Blockquote.Repo
   
   def related_fields do
     #need to add empty value at start of authors since it is optional
@@ -31,7 +32,11 @@ defmodule BlockquoteWeb.QuoteController do
   end
 
   def create(conn, %{"quote" => quote_params}) do
-    case Admin.create_quote(quote_params) do
+    changeset = Admin.create_quote_changeset(quote_params)
+    source_id = Ecto.Changeset.get_field(changeset, :source_id)
+    source = Admin.get_source!(source_id)
+    
+    case Repo.insert(Quote.validate_author_id(changeset, source)) do
       {:ok, quote} ->
         conn
         |> put_flash(:info, "Quote created successfully.")
@@ -54,8 +59,12 @@ defmodule BlockquoteWeb.QuoteController do
 
   def update(conn, %{"id" => id, "quote" => quote_params}) do
     quote = Admin.get_quote!(id)
+    
+    changeset = Admin.update_quote_changeset(quote, quote_params)
+    source_id = Ecto.Changeset.get_field(changeset, :source_id)
+    source = Admin.get_source!(source_id)
 
-    case Admin.update_quote(quote, quote_params) do
+    case Repo.update(Quote.validate_author_id(changeset, source)) do
       {:ok, quote} ->
         conn
         |> put_flash(:info, "Quote updated successfully.")

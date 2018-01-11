@@ -600,6 +600,23 @@ defmodule Blockquote.Admin do
     |> Quote.changeset(attrs)
     |> Repo.update()
   end
+  
+  @doc """
+  Gets the changeset used for creating a quote
+
+  """
+  def create_quote_changeset(attrs \\ %{}) do
+    %Quote{}
+    |> Quote.changeset(attrs)
+  end
+
+  @doc """
+  Gets the changeset used for updating a quote.
+  """
+  def update_quote_changeset(%Quote{} = quote, attrs) do
+    quote
+    |> Quote.changeset(attrs)
+  end
 
   @doc """
   Deletes a Quote.
