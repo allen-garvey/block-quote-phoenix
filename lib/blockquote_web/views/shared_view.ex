@@ -39,8 +39,16 @@ defmodule BlockquoteWeb.SharedView do
   	Returns inserted_at date as string for ecto model
   	"""
   	def item_date_created(item) do
-  		"#{item.inserted_at.year}-#{pad_date_digit(item.inserted_at.month)}-#{pad_date_digit(item.inserted_at.day)} #{pad_date_digit(item.inserted_at.hour)}:#{pad_date_digit(item.inserted_at.minute)}"
+  		"#{date_to_iso_string(item.inserted_at)} #{pad_date_digit(item.inserted_at.hour)}:#{pad_date_digit(item.inserted_at.minute)}"
   	end
+  	
+  	@doc """
+  	Returns date as iso_formatted string YYYY-MM-DD
+  	"""
+  	def date_to_iso_string(date) do
+  		"#{date.year}-#{pad_date_digit(date.month)}-#{pad_date_digit(date.day)}"
+  	end
+  	
   	
   	def pad_date_digit(digit) do
   		Integer.to_string(digit) |> String.pad_leading(2, ["0"])
@@ -83,6 +91,10 @@ defmodule BlockquoteWeb.SharedView do
 	
 	def form_input(f, :text, field, required_fields, nil) do
 		textarea(f, field, class: "form-control", required: field_required?(field, required_fields))
+	end
+	
+	def form_input(f, :date, field, required_fields, nil) do
+		date_select(f, field, class: "form-control", required: field_required?(field, required_fields), year: [options: 2015..DateTime.utc_now.year])
 	end
 	
 	def form_input(f, :select, field, required_fields, items) do
