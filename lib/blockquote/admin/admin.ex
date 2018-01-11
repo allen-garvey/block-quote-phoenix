@@ -661,6 +661,14 @@ defmodule Blockquote.Admin do
   def list_daily_quotes do
     Repo.all(from(DailyQuote, order_by: [desc: :id]))
   end
+  
+  @doc """
+  Returns the list of daily_quotes for index pages.
+
+  """
+  def list_daily_quotes_for_index do
+    Repo.all(from(DailyQuote, order_by: [desc: :id])) |> Repo.preload([:quote])
+  end
 
   @doc """
   Gets a single daily_quote.
@@ -677,6 +685,12 @@ defmodule Blockquote.Admin do
 
   """
   def get_daily_quote!(id), do: Repo.get!(DailyQuote, id)
+  
+  @doc """
+  Gets a single daily_quote for index pages.
+
+  """
+  def get_daily_quote_for_show!(id), do: Repo.get!(DailyQuote, id) |> Repo.preload([:quote])
 
   @doc """
   Creates a daily_quote.

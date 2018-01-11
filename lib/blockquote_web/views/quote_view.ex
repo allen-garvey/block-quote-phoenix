@@ -24,8 +24,16 @@ defmodule BlockquoteWeb.QuoteView do
   end
   
   def to_excerpt(quote) do
-    if String.length(quote.body) > 120 do
-        quote.body |> String.slice(0, 130) |> Kernel.<>("...")
+    to_excerpt(quote, 130)
+  end
+  
+  def to_short_excerpt(quote) do
+    to_excerpt(quote, 25)
+  end
+  
+  def to_excerpt(quote, max_length) do
+    if String.length(quote.body) > max_length do
+        quote.body |> String.slice(0, max_length) |> Kernel.<>("...")
     else
         quote.body
     end
@@ -37,6 +45,13 @@ defmodule BlockquoteWeb.QuoteView do
     else
       quote.source.author
     end
+  end
+  
+  @doc """
+  Maps a list of quotes into tuples, used for forms
+  """
+  def map_for_form(quotes) do
+    Enum.map(quotes, &{to_short_excerpt(&1), &1.id})
   end
   
   def item_columns(conn, quote) do
