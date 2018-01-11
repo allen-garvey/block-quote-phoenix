@@ -21,7 +21,6 @@ defmodule Blockquote.Admin.DailyQuote do
     daily_quote
     |> cast(attrs, [:date_used, :quote_id])
     |> validate_required(required_fields())
-    |> unique_constraint(:date_used, name: :daily_quote_unique_index)
-    |> unique_constraint(:quote_id, name: :daily_quote_unique_index)
+    |> unique_constraint(:date_used)
   end
 end
