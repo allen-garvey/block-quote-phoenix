@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="description" content="A CMS for inspiring quotes"/>
     <title>Blockquote</title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>"/>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/admin.css") %>"/>
   </head>
 
   <body>
@@ -24,6 +24,5 @@
       </main>
 
     </div> <!-- /container -->
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
