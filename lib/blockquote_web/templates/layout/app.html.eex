@@ -9,20 +9,18 @@
   </head>
 
   <body>
-    <div class="container">
-      <header class="header">
-        <div class="branding">
-          <h1 class="site-name"><a href="/admin">Block Quote Administration</a></h1>
-        </div>
-      </header>
+    <header class="header">
+      <div class="container branding">
+        <h1 class="site-name"><a href="/admin">Block Quote</a></h1>
+      </div>
+    </header>
 
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+    <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+    <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
+    <main class="container" role="main">
+      <%= render @view_module, @view_template, assigns %>
+    </main>
 
-    </div> <!-- /container -->
   </body>
 </html>
