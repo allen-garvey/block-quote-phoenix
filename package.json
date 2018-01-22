@@ -1,0 +1,27 @@
+{
+  "name": "block-quote-phoenix",
+  "version": "1.0.0",
+  "description": "To start your Phoenix server:",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "gulp watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/allen-garvey/block-quote-phoenix.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/allen-garvey/block-quote-phoenix/issues"
+  },
+  "homepage": "https://github.com/allen-garvey/block-quote-phoenix#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0"
+  }
+}
