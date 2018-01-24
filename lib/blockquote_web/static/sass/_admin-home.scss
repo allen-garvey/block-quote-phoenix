@@ -1,0 +1,43 @@
+.admin-fields-list{
+	padding: 0;
+	width: 450px;
+	border-top: 20px solid #79aec8;
+	li{
+		display: flex;
+		justify-content: space-between;
+		padding: 8px $contentHorizontalPadding;
+		border-bottom: 1px solid #eee;
+
+		&:last-of-type{
+			border-bottom: none;
+		}
+	}
+	.field-title{
+		font-weight: 600;
+	}
+}
+
+
+/* ACTION ICONS */
+
+.addlink {
+    padding-left: 16px;
+}
+//based on: http://stackoverflow.com/questions/17359787/create-a-cross-shape-in-css
+.admin-fields-list .addlink:before, .object-tools .addlink:after{
+    content: '';
+    display: inline-block;
+    vertical-align: baseline;
+    width: 9px;
+    height: 9px;
+    margin-right: 4px;
+    background: linear-gradient(to bottom, transparent 35%, #70bf2b 35%, #70bf2b 65%,  transparent 65%),
+                linear-gradient(to right, transparent 35%, #70bf2b 35%, #70bf2b 65%, transparent 65%);
+}
+
+.object-tools .addlink:after{
+    margin-left: 4px;
+    margin-right: 0;
+    background: linear-gradient(to bottom, transparent 35%, #fff 35%, #fff 65%,  transparent 65%),
+                linear-gradient(to right, transparent 35%, #fff 35%, #fff 65%, transparent 65%);
+}

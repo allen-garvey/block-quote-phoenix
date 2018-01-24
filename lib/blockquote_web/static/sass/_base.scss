@@ -3,6 +3,8 @@
 */
 
 
+$contentHorizontalPadding: 4px;
+
 body {
     margin: 0;
     padding: 0;
@@ -51,11 +53,15 @@ h1,h2,h3,h4,h5 {
     font-weight: bold;
 }
 
-h1 {
+h1, .page-title {
     margin: 0 0 20px;
     font-weight: 300;
     font-size: 20px;
     color: #666;
+}
+.page-title{
+    padding: 0 $contentHorizontalPadding;
+    margin-bottom: 2px;
 }
 
 h2 {
@@ -661,30 +667,6 @@ div.breadcrumbs a:focus, div.breadcrumbs a:hover {
     color: #c4dce8;
 }
 
-/* ACTION ICONS */
-
-.addlink {
-    padding-left: 16px;
-}
-//based on: http://stackoverflow.com/questions/17359787/create-a-cross-shape-in-css
-.admin-main-menu-table .addlink:before, .object-tools .addlink:after{
-    content: '';
-    display: inline-block;
-    vertical-align: baseline;
-    width: 9px;
-    height: 9px;
-    margin-right: 4px;
-    background: linear-gradient(to bottom, transparent 35%, #70bf2b 35%, #70bf2b 65%,  transparent 65%),
-                linear-gradient(to right, transparent 35%, #70bf2b 35%, #70bf2b 65%, transparent 65%);
-}
-
-.object-tools .addlink:after{
-    margin-left: 4px;
-    margin-right: 0;
-    background: linear-gradient(to bottom, transparent 35%, #fff 35%, #fff 65%,  transparent 65%),
-                linear-gradient(to right, transparent 35%, #fff 35%, #fff 65%, transparent 65%);
-}
-
 /* OBJECT TOOLS */
 
 .object-tools {
@@ -762,4 +744,10 @@ div.breadcrumbs a:focus, div.breadcrumbs a:hover {
     text-decoration: none;
     border-bottom-color: #79aec8;
     color: #79aec8;
+}
+
+
+//alerts
+.alert:empty{
+    display: none;
 }
