@@ -436,17 +436,13 @@ select[multiple] {
 
 /* FORM BUTTONS */
 
-.button, input[type=submit], input[type=button], .submit-row input, a.button {
+.button, input[type=submit], input[type=button], .submit-row input, .submit-row .button, a.button {
     background: #79aec8;
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
     color: #fff;
     cursor: pointer;
-}
-
-a.button {
-    padding: 4px 5px;
 }
 
 .button:active, input[type=submit]:active, input[type=button]:active,
@@ -460,10 +456,14 @@ a.button {
 }
 
 .button.default, input[type=submit].default, .submit-row input.default {
-    float: right;
     border: none;
     font-weight: 400;
     background: #417690;
+}
+
+.submit-row{
+    display: flex;
+    justify-content: flex-end;
 }
 
 .button.default:active, input[type=submit].default:active,

@@ -13,7 +13,7 @@
       </div>
   <% end %>
 
-  <div class="form-group">
-    <%= submit "Submit", class: "btn btn-primary" %>
+  <div class="submit-row">
+    <%= submit "Save", class: "button default" %>
   </div>
 <% end %>
