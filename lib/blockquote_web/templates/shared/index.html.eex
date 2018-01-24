@@ -1,10 +1,9 @@
-<h2><%= "Select " <> @item_name_singular %></h2>
-
-<ul class="object-tools">
-	<li>
-		<%= link "Add " <> @item_name_singular, to: path_for_item(@conn, @item_name_singular, :new), class: "addlink" %>
-	</li>
-</ul>
+<div class="index-header">
+  <h2 class="page-title"><%= "Select " <> @item_name_singular %></h2>
+  <div class="object-tools">
+    <%= link "Add " <> @item_name_singular, to: path_for_item(@conn, @item_name_singular, :new), class: "addlink" %>
+  </div>
+</div>
 <h3><%= String.capitalize(@item_name_singular) %></h3>
 <table class="table">
   <tbody>
