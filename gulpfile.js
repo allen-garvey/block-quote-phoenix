@@ -28,6 +28,6 @@ gulp.task('watchSass', ['sass'], function() {
 /*
 * Main gulp tasks
 */
-gulp.task('watch', ['build', 'watchSass']);
+gulp.task('watch', ['watchSass']);
 gulp.task('build', ['sass']);
 gulp.task('default', ['build']);
