@@ -101,6 +101,12 @@ defmodule BlockquoteWeb.SharedView do
 		select(f, field, items, class: "form-control", required: field_required?(field, required_fields))
 	end
 
+  def breadcrumb_link(conn, item_name_singular) do
+    link_title = item_name_singular |> naive_pluralize |> String.capitalize
+    
+    link link_title, to: path_for_item(conn, item_name_singular, :index)
+  end
+
   def render("new.html", assigns) do
       conn = assigns[:conn]
       item_name_singular = assigns[:item_name_singular]
