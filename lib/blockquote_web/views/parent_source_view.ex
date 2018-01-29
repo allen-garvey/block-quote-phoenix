@@ -17,7 +17,6 @@ defmodule BlockquoteWeb.ParentSourceView do
 
   def shared_form_assigns(assigns) do
     %{
-        item_name_singular: "parent source",
         required_fields: Blockquote.Admin.ParentSource.required_fields(), 
         form_fields: form_fields(assigns[:related_fields])
       }

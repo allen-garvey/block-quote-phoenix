@@ -18,7 +18,6 @@ defmodule BlockquoteWeb.SourceTypeView do
 
   def shared_form_assigns() do
     %{
-        item_name_singular: "source type",
         required_fields: Blockquote.Admin.SourceType.required_fields(), 
         form_fields: form_fields()
       }

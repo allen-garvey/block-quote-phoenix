@@ -3,6 +3,15 @@ defmodule BlockquoteWeb.DailyQuoteController do
 
   alias Blockquote.Admin
   alias Blockquote.Admin.DailyQuote
+
+  def custom_render(conn, template, assigns) do
+    custom_render(conn, view_module(conn), template, assigns)
+  end
+
+  def custom_render(conn, view_module, template, assigns) do
+    assigns = [{:item_name_singular, "daily quote"}] ++ assigns
+    render(conn, view_module, template, assigns)
+  end
   
   def related_fields do
     quotes = Admin.list_quotes() |> BlockquoteWeb.QuoteView.map_for_form
@@ -11,15 +20,15 @@ defmodule BlockquoteWeb.DailyQuoteController do
 
   def index(conn, _params) do
     daily_quotes = Admin.list_daily_quotes_for_index()
-    render(conn, BlockquoteWeb.SharedView, "index.html", items: daily_quotes, item_view: view_module(conn), item_name_singular: "daily quote", item_display_func: :to_s)
+    custom_render(conn, BlockquoteWeb.SharedView, "index.html", items: daily_quotes, item_view: view_module(conn), item_display_func: :to_s)
   end
   
   def new_page(conn, changeset, _params) do
-    render(conn, "new.html", changeset: changeset, related_fields: related_fields())
+    custom_render(conn, "new.html", changeset: changeset, related_fields: related_fields())
   end
   
   def edit_page(conn, changeset, daily_quote) do
-    render(conn, "edit.html", changeset: changeset, related_fields: related_fields(), item: daily_quote)
+    custom_render(conn, "edit.html", changeset: changeset, related_fields: related_fields(), item: daily_quote)
   end
 
   def new(conn, params) do
@@ -40,7 +49,7 @@ defmodule BlockquoteWeb.DailyQuoteController do
 
   def show(conn, %{"id" => id}) do
     daily_quote = Admin.get_daily_quote_for_show!(id)
-    render(conn, "show.html", daily_quote: daily_quote)
+    custom_render(conn, "show.html", daily_quote: daily_quote)
   end
 
   def edit(conn, %{"id" => id}) do

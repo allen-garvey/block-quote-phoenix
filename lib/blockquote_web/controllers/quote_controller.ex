@@ -4,6 +4,15 @@ defmodule BlockquoteWeb.QuoteController do
   alias Blockquote.Admin
   alias Blockquote.Admin.Quote
   alias Blockquote.Repo
+
+  def custom_render(conn, template, assigns) do
+    custom_render(conn, view_module(conn), template, assigns)
+  end
+
+  def custom_render(conn, view_module, template, assigns) do
+    assigns = [{:item_name_singular, "quote"}] ++ assigns
+    render(conn, view_module, template, assigns)
+  end
   
   def related_fields do
     #need to add empty value at start of authors since it is optional
@@ -15,7 +24,7 @@ defmodule BlockquoteWeb.QuoteController do
 
   def index(conn, _params) do
     quotes = Admin.list_quotes()
-    render(conn, BlockquoteWeb.SharedView, "index.html", items: quotes, item_view: view_module(conn), item_name_singular: "quote", item_display_func: :to_excerpt)
+    custom_render(conn, BlockquoteWeb.SharedView, "index.html", items: quotes, item_view: view_module(conn), item_display_func: :to_excerpt)
   end
 
   def new(conn, params) do
@@ -24,11 +33,11 @@ defmodule BlockquoteWeb.QuoteController do
   end
   
   def new_page(conn, changeset, _params) do
-    render(conn, "new.html", changeset: changeset, related_fields: related_fields())
+    custom_render(conn, "new.html", changeset: changeset, related_fields: related_fields())
   end
   
   def edit_page(conn, changeset, quote) do
-    render(conn, "edit.html", changeset: changeset, related_fields: related_fields(), item: quote)
+    custom_render(conn, "edit.html", changeset: changeset, related_fields: related_fields(), item: quote)
   end
 
   def create(conn, %{"quote" => quote_params}) do
@@ -48,7 +57,7 @@ defmodule BlockquoteWeb.QuoteController do
 
   def show(conn, %{"id" => id}) do
     quote = Admin.get_quote_for_show!(id)
-    render(conn, "show.html", quote: quote)
+    custom_render(conn, "show.html", quote: quote)
   end
 
   def edit(conn, %{"id" => id}) do

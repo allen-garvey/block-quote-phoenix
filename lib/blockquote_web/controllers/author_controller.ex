@@ -4,14 +4,23 @@ defmodule BlockquoteWeb.AuthorController do
   alias Blockquote.Admin
   alias Blockquote.Admin.Author
 
+  def custom_render(conn, template, assigns) do
+    custom_render(conn, view_module(conn), template, assigns)
+  end
+
+  def custom_render(conn, view_module, template, assigns) do
+    assigns = [{:item_name_singular, "author"}] ++ assigns
+    render(conn, view_module, template, assigns)
+  end
+
   def index(conn, _params) do
     authors = Admin.list_authors()
-    render(conn, BlockquoteWeb.SharedView, "index.html", items: authors, item_view: view_module(conn), item_name_singular: "author", item_display_func: :to_sorted_name)
+    custom_render(conn, BlockquoteWeb.SharedView, "index.html", items: authors, item_view: view_module(conn), item_display_func: :to_sorted_name)
   end
 
   def new(conn, _params) do
     changeset = Admin.change_author(%Author{})
-    render(conn, "new.html", changeset: changeset)
+    custom_render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"author" => author_params}) do
@@ -21,19 +30,19 @@ defmodule BlockquoteWeb.AuthorController do
         |> put_flash(:info, "Author created successfully.")
         |> redirect(to: author_path(conn, :show, author))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        custom_render(conn, "new.html", changeset: changeset)
     end
   end
 
   def show(conn, %{"id" => id}) do
     author = Admin.get_author_for_show!(id)
-    render(conn, "show.html", author: author)
+    custom_render(conn, "show.html", author: author)
   end
 
   def edit(conn, %{"id" => id}) do
     author = Admin.get_author!(id)
     changeset = Admin.change_author(author)
-    render(conn, "edit.html", author: author, changeset: changeset)
+    custom_render(conn, "edit.html", author: author, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "author" => author_params}) do
@@ -45,7 +54,7 @@ defmodule BlockquoteWeb.AuthorController do
         |> put_flash(:info, "Author updated successfully.")
         |> redirect(to: author_path(conn, :show, author))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", author: author, changeset: changeset)
+        custom_render(conn, "edit.html", author: author, changeset: changeset)
     end
   end
 

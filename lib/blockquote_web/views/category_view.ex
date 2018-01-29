@@ -18,7 +18,6 @@ defmodule BlockquoteWeb.CategoryView do
 
   def shared_form_assigns() do
     %{
-        item_name_singular: "category",
         required_fields: Blockquote.Admin.Category.required_fields(), 
         form_fields: form_fields()
       }

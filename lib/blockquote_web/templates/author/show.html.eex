@@ -1,7 +1,7 @@
 <%= render BlockquoteWeb.SharedView, "show_header.html",
                                 conn: @conn,
                                 title: to_s(@author),
-                                item_name_singular: "author",
+                                item_name_singular: @item_name_singular,
                                 item: @author,
                                 item_columns: item_columns(@conn, @author)
 %>
