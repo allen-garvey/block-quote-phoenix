@@ -114,8 +114,8 @@ defmodule BlockquoteWeb.SharedView do
       assigns = Map.merge(assigns, 
           %{
               title: "Add " <> item_name_singular,
-              back_link_title: "All " <> naive_pluralize(item_name_singular),
-              back_link_path: path_for_item(conn, item_name_singular, :index),
+              # back_link_title: "All " <> naive_pluralize(item_name_singular),
+              # back_link_path: path_for_item(conn, item_name_singular, :index),
               action: path_for_item(conn, item_name_singular, :create),
           }
       )
