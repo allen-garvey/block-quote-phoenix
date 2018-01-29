@@ -1,4 +1,4 @@
-<h2><%= @title %></h2>
+<h2 class="page-title"><%= @title %></h2>
 
 <span><%= link @back_link_title, to: @back_link_path %></span>
 

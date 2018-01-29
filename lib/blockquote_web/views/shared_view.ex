@@ -90,7 +90,7 @@ defmodule BlockquoteWeb.SharedView do
 	end
 	
 	def form_input(f, :text, field, required_fields, nil) do
-		textarea(f, field, class: "form-control", required: field_required?(field, required_fields))
+		textarea(f, field, class: "form-control", required: field_required?(field, required_fields), cols: 80, rows: 10)
 	end
 	
 	def form_input(f, :date, field, required_fields, nil) do
@@ -107,7 +107,7 @@ defmodule BlockquoteWeb.SharedView do
         
         assigns = Map.merge(assigns, 
             %{
-                title: "New " <> item_name_singular,
+                title: "Add " <> item_name_singular,
                 back_link_title: "All " <> naive_pluralize(item_name_singular),
                 back_link_path: path_for_item(conn, item_name_singular, :index),
                 action: path_for_item(conn, item_name_singular, :create),

@@ -206,17 +206,7 @@ p img, h1 img, h2 img, h3 img, h4 img, td img {
     font-weight: normal;
 }
 
-.float-right {
-    float: right;
-}
 
-.float-left {
-    float: left;
-}
-
-.clear {
-    clear: both;
-}
 
 .align-left {
     text-align: left;
@@ -226,15 +216,6 @@ p img, h1 img, h2 img, h3 img, h4 img, td img {
     text-align: right;
 }
 
-.example {
-    margin: 10px 0;
-    padding: 5px 10px;
-    background: #efefef;
-}
-
-.nowrap {
-    white-space: nowrap;
-}
 
 /* TABLES */
 
@@ -699,5 +680,9 @@ div.breadcrumbs a:focus, div.breadcrumbs a:hover {
 
 //alerts
 .alert:empty{
+    display: none;
+}
+
+.hidden {
     display: none;
 }
