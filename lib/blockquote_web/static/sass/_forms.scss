@@ -70,6 +70,16 @@ select[multiple] {
     background: #417690;
 }
 
+.button.delete{
+    background: #ba2121;
+}
+
+.button.delete:focus,
+.button.delete:hover,
+.button.delete:active {
+    background: #a41515;
+}
+
 .button.default:active, input[type=submit].default:active,
 .button.default:focus, input[type=submit].default:focus,
 .button.default:hover, input[type=submit].default:hover {
