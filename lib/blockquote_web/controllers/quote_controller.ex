@@ -33,14 +33,23 @@ defmodule BlockquoteWeb.QuoteController do
   end
   
   def new_page(conn, changeset, _params) do
-    custom_render(conn, "new.html", changeset: changeset, related_fields: related_fields())
+    custom_render(conn, "new.html", changeset: changeset, related_fields: related_fields(), save_another: true)
   end
   
   def edit_page(conn, changeset, quote) do
     custom_render(conn, "edit.html", changeset: changeset, related_fields: related_fields(), item: quote)
   end
 
-  def create(conn, %{"quote" => quote_params}) do
+  def create_succeeded(conn, quote, "true") do
+    changeset = Admin.change_quote(%Quote{author_id: quote.author_id, category_id: quote.category_id, source_id: quote.source_id})
+    new_page(conn, changeset, nil)
+  end
+
+  def create_succeeded(conn, quote, _save_another) do
+    redirect(conn, to: quote_path(conn, :show, quote))
+  end
+
+  def create(conn, %{"quote" => quote_params, "save_another" => save_another}) do
     changeset = Admin.create_quote_changeset(quote_params)
     source_id = Ecto.Changeset.get_field(changeset, :source_id)
     source = Admin.get_source!(source_id)
@@ -48,8 +57,8 @@ defmodule BlockquoteWeb.QuoteController do
     case Repo.insert(Quote.validate_author_id(changeset, source)) do
       {:ok, quote} ->
         conn
-        |> put_flash(:info, "Quote created successfully.")
-        |> redirect(to: quote_path(conn, :show, quote))
+          |> put_flash(:info, "Quote created successfully.")
+          |> create_succeeded(quote, save_another)
       {:error, %Ecto.Changeset{} = changeset} ->
         new_page(conn, changeset, nil)
     end

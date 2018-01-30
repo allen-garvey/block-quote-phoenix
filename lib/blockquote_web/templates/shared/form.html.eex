@@ -14,6 +14,9 @@
   <% end %>
 
   <div class="submit-row">
-    <%= submit "Save", class: "button default" %>
+    <%= if assigns[:save_another] do
+      submit "Save and add another", class: "button", name: "save_another", value: "true"
+    end %>
+    <%= submit "Save", class: "button default", name: "save_another", value: "false" %>
   </div>
 <% end %>
