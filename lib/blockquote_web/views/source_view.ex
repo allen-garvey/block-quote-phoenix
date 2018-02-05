@@ -17,7 +17,6 @@ defmodule BlockquoteWeb.SourceView do
 
   def shared_form_assigns(assigns) do
     %{
-        item_name_singular: "source",
         required_fields: Blockquote.Admin.Source.required_fields(), 
         form_fields: form_fields(assigns[:related_fields])
       }

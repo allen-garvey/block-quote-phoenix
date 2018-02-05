@@ -1,0 +1,18 @@
+.admin-fields-list{
+	padding: 0;
+	width: 450px;
+	border-top: 20px solid #79aec8;
+	li{
+		display: flex;
+		justify-content: space-between;
+		padding: 8px $contentHorizontalPadding;
+		border-bottom: 1px solid #eee;
+
+		&:last-of-type{
+			border-bottom: none;
+		}
+	}
+	.field-title{
+		font-weight: 600;
+	}
+}

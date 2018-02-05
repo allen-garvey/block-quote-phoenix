@@ -5,25 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="description" content="A CMS for inspiring quotes"/>
     <title>Blockquote</title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>"/>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/admin.css") %>"/>
   </head>
 
   <body>
-    <div class="container">
-      <header class="header">
-        <div class="branding">
-          <h1 class="site-name"><a href="/admin">Block Quote Administration</a></h1>
+    <header class="header">
+      <div class="container branding">
+        <h1 class="site-name"><a href="/admin">Block Quote</a></h1>
+      </div>
+      <div class="breadcrumbs">
+        <div class="container">
+          <a href="/admin">Home</a>
+          <%= if assigns[:item_name_singular] do
+              BlockquoteWeb.SharedView.breadcrumb_link(@conn, @item_name_singular)
+          end %>
         </div>
-      </header>
-
+    </div>
+    </header>
+    
+    <div class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+    </div>
 
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
+    <main class="container" role="main">
+      <%= render @view_module, @view_template, assigns %>
+    </main>
 
-    </div> <!-- /container -->
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

@@ -4,14 +4,23 @@ defmodule BlockquoteWeb.SourceTypeController do
   alias Blockquote.Admin
   alias Blockquote.Admin.SourceType
 
+  def custom_render(conn, template, assigns) do
+    custom_render(conn, view_module(conn), template, assigns)
+  end
+
+  def custom_render(conn, view_module, template, assigns) do
+    assigns = [{:item_name_singular, "source type"}] ++ assigns
+    render(conn, view_module, template, assigns)
+  end
+
   def index(conn, _params) do
     source_types = Admin.list_source_types()
-    render(conn, BlockquoteWeb.SharedView, "index.html", items: source_types, item_view: view_module(conn), item_name_singular: "source type", item_display_func: :to_s)
+    custom_render(conn, BlockquoteWeb.SharedView, "index.html", items: source_types, item_view: view_module(conn), item_display_func: :to_s)
   end
 
   def new(conn, _params) do
     changeset = Admin.change_source_type(%SourceType{})
-    render(conn, "new.html", changeset: changeset)
+    custom_render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"source_type" => source_type_params}) do
@@ -21,19 +30,19 @@ defmodule BlockquoteWeb.SourceTypeController do
         |> put_flash(:info, "Source type created successfully.")
         |> redirect(to: source_type_path(conn, :show, source_type))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        custom_render(conn, "new.html", changeset: changeset)
     end
   end
 
   def show(conn, %{"id" => id}) do
     source_type = Admin.get_source_type_for_show!(id)
-    render(conn, "show.html", source_type: source_type)
+    custom_render(conn, "show.html", source_type: source_type)
   end
 
   def edit(conn, %{"id" => id}) do
     source_type = Admin.get_source_type!(id)
     changeset = Admin.change_source_type(source_type)
-    render(conn, "edit.html", source_type: source_type, changeset: changeset)
+    custom_render(conn, "edit.html", source_type: source_type, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "source_type" => source_type_params}) do
@@ -45,7 +54,7 @@ defmodule BlockquoteWeb.SourceTypeController do
         |> put_flash(:info, "Source type updated successfully.")
         |> redirect(to: source_type_path(conn, :show, source_type))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", source_type: source_type, changeset: changeset)
+        custom_render(conn, "edit.html", source_type: source_type, changeset: changeset)
     end
   end
 

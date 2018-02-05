@@ -30,3 +30,6 @@ npm-debug.log
 npm-debug.log*
 Thumbs.db
 *.zip
+
+#compiled sass
+priv/static/css

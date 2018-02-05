@@ -4,6 +4,15 @@ defmodule BlockquoteWeb.ParentSourceController do
   alias Blockquote.Admin
   alias Blockquote.Admin.ParentSource
   
+  def custom_render(conn, template, assigns) do
+    custom_render(conn, view_module(conn), template, assigns)
+  end
+
+  def custom_render(conn, view_module, template, assigns) do
+    assigns = [{:item_name_singular, "parent source"}] ++ assigns
+    render(conn, view_module, template, assigns)
+  end
+
   def related_fields do
     source_types = Admin.list_source_types() |> BlockquoteWeb.SourceTypeView.map_for_form
     
@@ -12,15 +21,15 @@ defmodule BlockquoteWeb.ParentSourceController do
 
   def index(conn, _params) do
     parent_sources = Admin.list_parent_sources()
-    render(conn, BlockquoteWeb.SharedView, "index.html", items: parent_sources, item_view: view_module(conn), item_name_singular: "parent source", item_display_func: :to_s)
+    custom_render(conn, BlockquoteWeb.SharedView, "index.html", items: parent_sources, item_view: view_module(conn), item_display_func: :to_s)
   end
   
   def new_page(conn, changeset, _params) do
-    render(conn, "new.html", changeset: changeset, related_fields: related_fields())
+    custom_render(conn, "new.html", changeset: changeset, related_fields: related_fields())
   end
   
   def edit_page(conn, changeset, parent_source) do
-    render(conn, "edit.html", changeset: changeset, related_fields: related_fields(), item: parent_source)
+    custom_render(conn, "edit.html", changeset: changeset, related_fields: related_fields(), item: parent_source)
   end
 
   def new(conn, params) do
@@ -41,7 +50,7 @@ defmodule BlockquoteWeb.ParentSourceController do
 
   def show(conn, %{"id" => id}) do
     parent_source = Admin.get_parent_source_for_show!(id)
-    render(conn, "show.html", parent_source: parent_source)
+    custom_render(conn, "show.html", parent_source: parent_source)
   end
 
   def edit(conn, %{"id" => id}) do

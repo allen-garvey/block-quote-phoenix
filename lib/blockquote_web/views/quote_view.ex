@@ -17,7 +17,6 @@ defmodule BlockquoteWeb.QuoteView do
 
   def shared_form_assigns(assigns) do
     %{
-        item_name_singular: "quote",
         required_fields: Blockquote.Admin.Quote.required_fields(), 
         form_fields: form_fields(assigns[:related_fields])
       }

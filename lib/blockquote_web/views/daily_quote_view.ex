@@ -18,7 +18,6 @@ defmodule BlockquoteWeb.DailyQuoteView do
 
   def shared_form_assigns(assigns) do
     %{
-        item_name_singular: "daily quote",
         required_fields: Blockquote.Admin.DailyQuote.required_fields(), 
         form_fields: form_fields(assigns[:related_fields])
       }

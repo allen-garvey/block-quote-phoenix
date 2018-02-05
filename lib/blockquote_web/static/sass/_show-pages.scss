@@ -1,0 +1,16 @@
+.show-header-buttons{
+	display: flex;
+	justify-content: flex-end;
+
+	.button + .button{
+		margin-left: 24px;
+	}
+}
+
+.related-fields-title{
+	color: #000;
+}
+.related-fields-list{
+	list-style-type: none;
+	padding-left: 8px;
+}

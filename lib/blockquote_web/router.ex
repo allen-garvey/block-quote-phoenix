@@ -16,7 +16,8 @@ defmodule BlockquoteWeb.Router do
   scope "/", BlockquoteWeb do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    # get "/", PageController, :index
+    get "/", AdminController, :index
   end
   
   scope "/admin", BlockquoteWeb do

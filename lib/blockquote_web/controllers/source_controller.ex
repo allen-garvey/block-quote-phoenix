@@ -3,6 +3,15 @@ defmodule BlockquoteWeb.SourceController do
 
   alias Blockquote.Admin
   alias Blockquote.Admin.Source
+
+  def custom_render(conn, template, assigns) do
+    custom_render(conn, view_module(conn), template, assigns)
+  end
+
+  def custom_render(conn, view_module, template, assigns) do
+    assigns = [{:item_name_singular, "source"}] ++ assigns
+    render(conn, view_module, template, assigns)
+  end
   
   def related_fields do
     authors = Admin.list_authors() |> BlockquoteWeb.AuthorView.map_for_form
@@ -15,15 +24,15 @@ defmodule BlockquoteWeb.SourceController do
   
   def index(conn, _params) do
     sources = Admin.list_sources()
-    render(conn, BlockquoteWeb.SharedView, "index.html", items: sources, item_view: view_module(conn), item_name_singular: "source", item_display_func: :to_s)
+    custom_render(conn, BlockquoteWeb.SharedView, "index.html", items: sources, item_view: view_module(conn), item_display_func: :to_s)
   end
   
   def new_page(conn, changeset, _params) do
-    render(conn, "new.html", changeset: changeset, related_fields: related_fields())
+    custom_render(conn, "new.html", changeset: changeset, related_fields: related_fields())
   end
   
   def edit_page(conn, changeset, source) do
-    render(conn, "edit.html", changeset: changeset, related_fields: related_fields(), item: source)
+    custom_render(conn, "edit.html", changeset: changeset, related_fields: related_fields(), item: source)
   end
 
   def new(conn, params) do
@@ -44,7 +53,7 @@ defmodule BlockquoteWeb.SourceController do
 
   def show(conn, %{"id" => id}) do
     source = Admin.get_source_for_show!(id)
-    render(conn, "show.html", source: source)
+    custom_render(conn, "show.html", source: source)
   end
 
   def edit(conn, %{"id" => id}) do
