@@ -26,7 +26,7 @@ erl_crash.dump
 .sass-cache
 .sass-cache/*
 node_modules/*
-.npm-debug.log
-.npm-debug*
+npm-debug.log
+npm-debug.log*
 Thumbs.db
 *.zip
