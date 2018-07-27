@@ -6,7 +6,7 @@ input, textarea, select, .form-row p, form .button, button {
     vertical-align: middle;
     font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
     font-weight: normal;
-    font-size: 13px;
+    font-size: 1rem;
 }
 
 textarea {
@@ -39,7 +39,7 @@ select[multiple] {
 $form_group_padding: 10px;
 .form-group {
     padding: $form_group_padding;
-    font-size: 13px;
+    font-size: 1rem;
     border-bottom: 1px solid #eee;
 }
 
@@ -102,7 +102,7 @@ label {
     display: inline-block;
     font-weight: normal;
     color: #666;
-    font-size: 13px;
+    font-size: 1rem;
     min-width: 160px;
 }
 
@@ -137,7 +137,7 @@ label {
     padding: 9px 15px;
     border: 0;
     color: #fff;
-    font-size: 13px;
+    font-size: 1rem;
 }
 
 
