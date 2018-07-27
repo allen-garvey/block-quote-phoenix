@@ -1,10 +1,10 @@
-<h2 class="page-title"><%= @title %></h2>
-
-<div class="show-header-buttons">
-	<%= link "Delete", to: path_for_item(@conn, @item_name_singular, :delete, @item), method: :delete, data: [confirm: "Are you sure?"], class: "button delete" %>
-	<%= link "Edit", to: path_for_item(@conn, @item_name_singular, :edit, @item), class: "button" %>
+<div class="show-header-title-container">
+	<h2 class="page-title"><%= @title %></h2>
+	<div class="show-header-buttons">
+		<%= link "Delete", to: path_for_item(@conn, @item_name_singular, :delete, @item), method: :delete, data: [confirm: "Are you sure?"], class: "button delete" %>
+		<%= link "Edit", to: path_for_item(@conn, @item_name_singular, :edit, @item), class: "button" %>
+	</div>
 </div>
-
 <ul>
     <%= for {column_name, column_value} <- @item_columns do %>
         <li>
