@@ -36,9 +36,9 @@ select[multiple] {
 
 
 /* FORM ROWS */
-
+$form_group_padding: 10px;
 .form-group {
-    padding: 10px;
+    padding: $form_group_padding;
     font-size: 13px;
     border-bottom: 1px solid #eee;
 }
@@ -154,4 +154,22 @@ label {
 .add-another {
     width: 16px;
     height: 16px;
+}
+
+
+/*
+* Styles for symbols list for textarea inputs (quotes)
+*/
+.text-symbols-list{
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: $form_group_padding;
+
+    li{
+        margin-right: 2em;
+    }
+    .symbol{
+        font-weight: bold;
+    }
 }
