@@ -94,7 +94,7 @@ defmodule BlockquoteWeb.SharedView do
 	end
 	
 	def form_input(f, :date, field, required_fields, nil) do
-		date_select(f, field, class: "form-control", required: field_required?(field, required_fields), year: [options: 2015..DateTime.utc_now.year])
+    date_input(f, field, class: "form-control", required: field_required?(field, required_fields))
 	end
 	
 	def form_input(f, :select, field, required_fields, items) do
