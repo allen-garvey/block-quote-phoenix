@@ -55,7 +55,8 @@ defmodule BlockquoteWeb.SourceView do
       {"author", link(BlockquoteWeb.AuthorView.to_s(source.author), to: author_path(conn, :show, source.author))},
       {"source type", link(BlockquoteWeb.SourceTypeView.to_s(source.source_type), to: source_type_path(conn, :show, source.source_type))},
       {"parent source", parent_source_link},
-      {"url", BlockquoteWeb.SharedView.linkify(source.url)}, 
+      {"url", BlockquoteWeb.SharedView.linkify(source.url)},
+      {"release date", source.release_date}, 
     ]
   end
   
@@ -68,6 +69,7 @@ defmodule BlockquoteWeb.SourceView do
       {:source_type_id, :select, related_fields[:source_types]},
       {:parent_source_id, :select, related_fields[:parent_sources]},
       {:url, :string, nil},
+      {:release_date, :date, nil},
     ]
   end
 end

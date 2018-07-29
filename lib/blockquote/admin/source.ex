@@ -10,6 +10,7 @@ defmodule Blockquote.Admin.Source do
     field :title, :string
     field :sort_title, :string
     field :url, :string
+    field :release_date, :date
 
     timestamps()
     
@@ -26,7 +27,7 @@ defmodule Blockquote.Admin.Source do
   @doc false
   def changeset(%Source{} = source, attrs) do
     source
-    |> cast(attrs, [:title, :subtitle, :url, :author_id, :source_type_id, :parent_source_id, :sort_title])
+    |> cast(attrs, [:title, :subtitle, :url, :author_id, :source_type_id, :parent_source_id, :sort_title, :release_date])
     |> SortTitle.generate_sort_title(:title, :sort_title)
     |> validate_required(required_fields())
     |> foreign_key_constraint(:source_type_id)
