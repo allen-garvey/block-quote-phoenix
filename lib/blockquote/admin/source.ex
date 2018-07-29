@@ -2,11 +2,13 @@ defmodule Blockquote.Admin.Source do
   use Ecto.Schema
   import Ecto.Changeset
   alias Blockquote.Admin.Source
+  alias Blockquote.Admin.ModelHelpers.SortTitle
 
 
   schema "sources" do
     field :subtitle, :string
     field :title, :string
+    field :sort_title, :string
     field :url, :string
 
     timestamps()
@@ -18,13 +20,14 @@ defmodule Blockquote.Admin.Source do
   end
   
   def required_fields() do
-    [:title, :author_id, :source_type_id]
+    [:title, :sort_title, :author_id, :source_type_id]
   end
 
   @doc false
   def changeset(%Source{} = source, attrs) do
     source
-    |> cast(attrs, [:title, :subtitle, :url, :author_id, :source_type_id, :parent_source_id])
+    |> cast(attrs, [:title, :subtitle, :url, :author_id, :source_type_id, :parent_source_id, :sort_title])
+    |> SortTitle.generate_sort_title(:title, :sort_title)
     |> validate_required(required_fields())
     |> foreign_key_constraint(:source_type_id)
     |> assoc_constraint(:source_type)
