@@ -34,8 +34,9 @@ defmodule BlockquoteWeb.Router do
     resources "/daily-quotes", DailyQuoteController
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", BlockquoteWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", BlockquoteWeb do
+    pipe_through :api
+
+    get "/daily-quote", ApiDailyQuoteController, :get_daily_quote
+  end
 end
