@@ -20,6 +20,7 @@ defmodule BlockquoteWeb.ApiDailyQuoteView do
     		first_name: quote_author.first_name,
     		middle_name: quote_author.middle_name,
     		last_name: quote_author.last_name,
+    		display_name: author_display_name(quote_author)
     	},
 	}
   end
@@ -38,5 +39,25 @@ defmodule BlockquoteWeb.ApiDailyQuoteView do
   end
   def parent_source_title(parent_source) do
   	parent_source.title
+  end
+
+  def author_display_name(author) do
+  	first_name = initialize_name(author.first_name)
+	middle_name = initialize_name(author.middle_name)
+	last_name = initialize_name(author.last_name)
+
+	[first_name, middle_name, last_name] |> Enum.filter(fn x -> !is_nil(x) end) |> Enum.join(" ")
+  end
+
+
+  def initialize_name(name) do
+  	cond do
+		is_nil(name) ->
+			nil
+		String.length(name) == 1 ->
+			name <> "."
+		true ->
+			name
+	end
   end
 end
