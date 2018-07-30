@@ -1,12 +1,11 @@
 defmodule BlockquoteWeb.ApiDailyQuoteView do
   use BlockquoteWeb, :view
 
-  def render("show.json", %{daily_quote: daily_quote}) do
-    %{data: render_one(daily_quote, __MODULE__, "daily_quote.json", as: :daily_quote)}
+  def render("show.json", %{quote: quote}) do
+    %{data: render_one(quote, __MODULE__, "quote.json", as: :quote)}
   end
 
-  def render("daily_quote.json", %{daily_quote: daily_quote}) do
-  	quote = daily_quote.quote
+  def render("quote.json", %{quote: quote}) do
   	quote_author = author_for_quote(quote.author, quote.source.author)
     %{
     	id: quote.id,
