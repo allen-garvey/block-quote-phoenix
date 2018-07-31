@@ -13,7 +13,7 @@ defmodule BlockquoteWeb.ApiDailyQuoteController do
           # not really important if insert fails or not (such as due to race condition with someone else)
           # since if it does fail, we still have a quote to show (even if it is the "wrong" one), 
           # and on refresh the "right" one will be retrieved anyway
-          {_status, _message} -> render(conn, "show.json", quote: quote)
+          _ -> render(conn, "show.json", quote: quote)
         end
       # daily quote already saved
       daily_quote ->
