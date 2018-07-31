@@ -7,7 +7,7 @@ use Mix.Config
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
 config :blockquote, BlockquoteWeb.Endpoint,
-  http: [port: 3000],
+  http: [port: 6011],
   debug_errors: true,
   check_origin: false,
   code_reloader: true,
