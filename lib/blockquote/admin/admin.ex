@@ -563,7 +563,7 @@ defmodule Blockquote.Admin do
   Raises `Ecto.NoResultsError` if the Quote does not exist.
 
   """
-  def get_quote_for_show!(id), do: Repo.get!(Quote, id) |> Repo.preload([:category, :author, :source]) |> Repo.preload([source: :author])
+  def get_quote_for_show!(id), do: Repo.get!(Quote, id) |> Repo.preload([:category, :author, {:source, [:author]}])
 
   @doc """
   Creates a quote.
