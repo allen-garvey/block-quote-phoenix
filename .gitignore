@@ -33,3 +33,6 @@ Thumbs.db
 
 #compiled sass
 priv/static/css
+
+#sql migration files
+*.sql
