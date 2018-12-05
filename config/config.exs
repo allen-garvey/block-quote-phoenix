@@ -13,9 +13,7 @@ config :blockquote,
 config :blockquote, BlockquoteWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "cStnbGPZ8ZhXtVZvtEk51G6zVlfmX/5IpXlbchGmaqRPF2RCbP3VUNVurom5R3Vs",
-  render_errors: [view: BlockquoteWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Blockquote.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  render_errors: [view: BlockquoteWeb.ErrorView, accepts: ~w(html json)]
 
 # Configures Elixir's Logger
 config :logger, :console,
