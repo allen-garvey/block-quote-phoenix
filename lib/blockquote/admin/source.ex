@@ -30,11 +30,8 @@ defmodule Blockquote.Admin.Source do
     |> cast(attrs, [:title, :subtitle, :url, :author_id, :source_type_id, :parent_source_id, :sort_title, :release_date])
     |> SortTitle.generate_sort_title(:title, :sort_title)
     |> validate_required(required_fields())
-    |> foreign_key_constraint(:source_type_id)
     |> assoc_constraint(:source_type)
-    |> foreign_key_constraint(:author_id)
     |> assoc_constraint(:author)
-    |> foreign_key_constraint(:parent_source_id)
     |> assoc_constraint(:parent_source)
   end
 end

@@ -27,7 +27,6 @@ defmodule Blockquote.Admin.ParentSource do
     |> cast(attrs, [:title, :subtitle, :url, :source_type_id, :sort_title])
     |> SortTitle.generate_sort_title(:title, :sort_title)
     |> validate_required(required_fields())
-    |> foreign_key_constraint(:source_type_id)
     |> assoc_constraint(:source_type)
   end
 end
