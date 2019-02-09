@@ -33,3 +33,5 @@ Thumbs.db
 
 #compiled sass
 priv/static/css
+#elixir dialyzer
+.elixir_ls/*
