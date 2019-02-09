@@ -35,3 +35,5 @@ Thumbs.db
 priv/static/css
 #elixir dialyzer
 .elixir_ls/*
+#sql migration files
+*.sql

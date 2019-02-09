@@ -1,5 +1,5 @@
 defmodule Blockquote.Repo do
-  use Ecto.Repo, otp_app: :blockquote
+  use Ecto.Repo, otp_app: :blockquote, adapter: Ecto.Adapters.Postgres
 
   @doc """
   Dynamically loads the repository url from the

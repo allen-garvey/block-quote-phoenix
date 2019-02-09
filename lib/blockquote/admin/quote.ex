@@ -40,11 +40,8 @@ defmodule Blockquote.Admin.Quote do
     quote
     |> cast(attrs, [:body, :author_id, :category_id, :source_id])
     |> validate_required(required_fields())
-    |> foreign_key_constraint(:author_id)
     |> assoc_constraint(:author)
-    |> foreign_key_constraint(:source_id)
     |> assoc_constraint(:source)
-    |> foreign_key_constraint(:category_id)
     |> assoc_constraint(:category)
   end
 end
